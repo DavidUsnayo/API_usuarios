@@ -1,0 +1,223 @@
+openapi: 3.0.0
+info:
+  title: API de Usuarios
+  description: Documentación de la API de Usuarios con Swagger y YAML
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: Servidor local
+
+paths:
+  /usuarios:
+    get:
+      tags:
+        - Usuarios
+      summary: Obtener usuarios
+      operationId: obtenerUsuarios
+      responses:
+        200:
+          description: Lista de usuarios obtenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    nombre:
+                      type: string
+                      example: David Poma
+                    edad:
+                      type: number
+                      example: 22
+    post:
+      tags:
+        - Usuarios
+      summary: Crear un nuevo usuario
+      operationId: crearUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: "Juan Pérez"
+                edad:
+                  type: integer
+                  example: 25
+      responses:
+        201:
+          description: Usuario creado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Usuario agregado con éxito"
+                  id:
+                    type: integer
+                    example: 1
+        400:
+          description: Error en la solicitud (datos inválidos)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Datos inválidos"
+        500:
+          description: Error interno al insertar usuario
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Error al insertar usuario"
+  /usuarios/{id}:
+    get:
+      tags:
+        - Usuarios
+      summary: Obtiene un usuario por su ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del usuario a buscar
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Usuario encontrado
+          content:
+            application/json:
+              example:
+                id: 1
+                nombre: "Carlos"
+                edad: 30
+        404:
+          description: Usuario no encontrado
+    put:
+      summary: Actualizar un usuario por ID
+      tags:
+        - Usuarios
+      operationId: actualizarUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del usuario a actualizar
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: "Carlos López"
+                edad:
+                  type: integer
+                  example: 30
+      responses:
+        200:
+          description: Usuario actualizado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Usuario actualizado correctamente"
+        400:
+          description: Datos inválidos en la solicitud
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Datos inválidos"
+        404:
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Usuario no encontrado"
+        500:
+          description: Error interno en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Error en el servidor"
+    delete:
+      summary: Eliminar un usuario por ID
+      tags:
+        - Usuarios
+      operationId: eliminarUsuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del usuario a eliminar
+          schema:
+            type: integer
+            example: 1
+      responses:
+        200:
+          description: Usuario eliminado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Usuario eliminado correctamente"
+        404:
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Usuario no encontrado"
+        500:
+          description: Error interno en el servidor
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "No se pudo eliminar"
+
