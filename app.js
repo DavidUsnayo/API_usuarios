@@ -1,10 +1,10 @@
-const express = require('express');
-const mysql = require('mysql2');
+const {db} = require('./conexion.js')
 
+const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
-const {PORT, DB_HOST, DB_USER, DB_PASSWORD, DB_NAME} = require('./config.js')
+const PORT = process.env.PORT || 3000
 
 const server = express();
 server.use(express.json());
@@ -13,24 +13,6 @@ server.use(express.json());
 const swaggerDocs = YAML.load('./swagger.yaml');
 // Middleware de Swagger
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-
-// Configurar la conexión a SQL
-const db = mysql.createConnection({
-    host: DB_HOST,
-    user: DB_USER, 
-    password: DB_PASSWORD,  
-    database: DB_NAME
-});
-
-// Conectar a la base de datos
-db.connect(err => {
-    if (err) {
-        console.error('Error al conectar a la base de datos:', err);
-        return;
-    }
-    console.log('Conectado a la base de datos MySQL');
-});
 
 server.get("/",(req,res)=>{res.send("★彡[ᴀᴘɪ | ꜰᴜɴᴄɪᴏɴᴀɴᴅᴏ ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ]彡★")})
 
