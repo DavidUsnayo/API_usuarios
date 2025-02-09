@@ -5,6 +5,8 @@ info:
   version: 1.0.0
 
 servers:
+  - url: ${API_URL}
+    description: Servidor en Railway
   - url: http://localhost:3000
     description: Servidor local
 

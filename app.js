@@ -14,7 +14,10 @@ const swaggerDocs = YAML.load('./swagger.yaml');
 // Middleware de Swagger
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-server.get("/",(req,res)=>{res.send("★彡[ᴀᴘɪ | ꜰᴜɴᴄɪᴏɴᴀɴᴅᴏ ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ]彡★")})
+server.get("/", (req, res) => {
+    const info = `<br>  Host de la base de datos:<b>${db.config.connectionConfig.host} </b> <br>database: ${db.config.connectionConfig.database} `
+    res.send(`★彡[ᴀᴘɪ | ꜰᴜɴᴄɪᴏɴᴀɴᴅᴏ ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ]彡★ ${info} `);
+});
 
 //GET | Ruta para obtener usuarios desde la base de datos
 server.get('/usuarios', (req, res) => {
