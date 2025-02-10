@@ -7,15 +7,15 @@ const YAML = require('yamljs');
 const PORT = process.env.PORT || 3000
 
 const server = express();
-server.use(express.json());
 
+server.use(express.json());
 // Cargar Swagger
 const swaggerDocs = YAML.load('./swagger.yaml');
 // Middleware de Swagger
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 server.get("/", (req, res) => {
-    const color = `Color asignado por Variables de entrono: <b>${process.env.COLOR || 'variable no asignado'}</b>;`
+    const color = `Color asignado por Variables de entrono: <b>${process.env.COLOR_PRUEBA || 'variable no asignado'}</b>;`
     const info = `<br>  Host de la base de datos:<b>${db.config.connectionConfig.host} </b> <br>database: ${db.config.connectionConfig.database} `
     res.send(`★彡[ᴀᴘɪ | ꜰᴜɴᴄɪᴏɴᴀɴᴅᴏ ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ]彡★ ${info} <br> ${color}`);
 });
@@ -99,4 +99,3 @@ server.listen(PORT, function(){console.log('Servidor corriendo')});
 // npm install mysql2
 // npm install swagger-ui-express
 // npm install yamljs
-// npm install dotenv
