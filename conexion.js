@@ -1,4 +1,3 @@
-require('dotenv').config();  // Cargar las variables de entorno desde .env
 const mysql = require('mysql2');
 
 // Configurar la conexión con un pool
@@ -18,7 +17,6 @@ db.getConnection((err, connection) => {
     if (err) {
         console.error('❌ Error al conectar a la base de datos:', err);
         console.log('MYSQLHOST:', process.env.MYSQLHOST);
-        console.log('MYSQLUSER:', process.env.MYSQLUSER);
     } else {
         console.log('✅ Conectado a la base de datos MySQL en Railway');
         connection.release(); // Liberar conexión después de verificar

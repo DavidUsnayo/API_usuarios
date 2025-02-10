@@ -1,4 +1,3 @@
-require('dotenv').config();    //llamado para usar COLOR_FAVORITO
 const {db} = require('./conexion.js')
 
 const express = require('express');
@@ -16,11 +15,9 @@ const swaggerDocs = YAML.load('./swagger.yaml');
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 server.get("/", (req, res) => {
-    const letra = process.env.LETRA || 'KA'
-    const dia = process.env.DIA
-    const color = process.env.COLOR_FAVORITO;
+    const color = `Color asignado por Variables de entrono: <b>${process.env.COLOR || 'variable no asignado'}</b>;`
     const info = `<br>  Host de la base de datos:<b>${db.config.connectionConfig.host} </b> <br>database: ${db.config.connectionConfig.database} `
-    res.send(`★彡[ᴀᴘɪ | ꜰᴜɴᴄɪᴏɴᴀɴᴅᴏ ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ]彡★ ${info} <br> ${color} <br> ${letra} <br> ${dia} `);
+    res.send(`★彡[ᴀᴘɪ | ꜰᴜɴᴄɪᴏɴᴀɴᴅᴏ ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ]彡★ ${info} <br> ${color}`);
 });
 
 //GET | Ruta para obtener usuarios desde la base de datos
