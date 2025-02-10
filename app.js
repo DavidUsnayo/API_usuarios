@@ -1,3 +1,4 @@
+require('dotenv').config();    //llamado para usar COLOR_FAVORITO
 const {db} = require('./conexion.js')
 
 const express = require('express');
@@ -15,8 +16,9 @@ const swaggerDocs = YAML.load('./swagger.yaml');
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 server.get("/", (req, res) => {
+    const color = process.env.COLOR_FAVORITO;
     const info = `<br>  Host de la base de datos:<b>${db.config.connectionConfig.host} </b> <br>database: ${db.config.connectionConfig.database} `
-    res.send(`★彡[ᴀᴘɪ | ꜰᴜɴᴄɪᴏɴᴀɴᴅᴏ ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ]彡★ ${info} `);
+    res.send(`★彡[ᴀᴘɪ | ꜰᴜɴᴄɪᴏɴᴀɴᴅᴏ ᴄᴏʀʀᴇᴄᴛᴀᴍᴇɴᴛᴇ]彡★ ${info} <br> ${color} `);
 });
 
 //GET | Ruta para obtener usuarios desde la base de datos
@@ -98,3 +100,4 @@ server.listen(PORT, function(){console.log('Servidor corriendo')});
 // npm install mysql2
 // npm install swagger-ui-express
 // npm install yamljs
+// npm install dotenv

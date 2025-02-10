@@ -1,23 +1,13 @@
+require('dotenv').config();  // Cargar las variables de entorno desde .env
 const mysql = require('mysql2');
 
 // Configurar la conexión con un pool
-// const db = mysql.createPool({
-//     host: process.env.MYSQLHOST || 'localhost',
-//     user: process.env.MYSQLUSER || 'root', 
-//     password: process.env.MYSQLPASSWORD || '',  
-//     database: process.env.MYSQLDATABASE || 'registro',
-//     port: process.env.MYSQLPORT || 3308,
-//     waitForConnections: true,    //estos ultimos 3 no son esenciales pero mejoran la base de datos
-//     connectionLimit: 10,
-//     queueLimit: 0
-// });
-
 const db = mysql.createPool({
-    host: 'mysql.railway.internal',
-    user: 'root', 
-    password: 'jCdXzJieuKxTYHNedATWICGmRdNZQRsO',  
-    database: 'railway',
-    port: 3306,
+    host: process.env.MYSQLHOST || 'localhost',
+    user: process.env.MYSQLUSER || 'root', 
+    password: process.env.MYSQLPASSWORD || '',  
+    database: process.env.MYSQLDATABASE || 'registro',
+    port: process.env.MYSQLPORT || 3308,
     waitForConnections: true,    //estos ultimos 3 no son esenciales pero mejoran la base de datos
     connectionLimit: 10,
     queueLimit: 0
